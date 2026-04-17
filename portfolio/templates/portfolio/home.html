@@ -1,0 +1,45 @@
+{% extends "core/base.html" %}
+
+{% block title %}Início - Meu Portfólio{% endblock %}
+
+{% block header_title %}{% if pessoal %}{{ pessoal.nome }}{% else %}Bem-vindo{% endif %}{% endblock %}
+
+{% block content %}
+{% if pessoal %}
+<div class="perfil" style="text-align: center; margin-bottom: 30px;">
+    <img src="{{ pessoal.imagem_url }}" alt="Foto de {{ pessoal.nome }}" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 4px solid #2c3e50; margin-bottom: 15px;">
+    <h2>{{ pessoal.nome }}</h2>
+    <p style="color: #666;">Estudante de {{ pessoal.curso }}</p>
+</div>
+
+<div class="secao" style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h3 style="color: #2c3e50; margin-bottom: 15px; border-bottom: 2px solid #3498db; padding-bottom: 8px;">Sobre Mim</h3>
+    <p>{{ pessoal.descricao }}</p>
+</div>
+
+<div class="secao" style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h3 style="color: #2c3e50; margin-bottom: 15px; border-bottom: 2px solid #3498db; padding-bottom: 8px;">Dados Pessoais</h3>
+    <ul style="list-style: none; padding: 0;">
+        <li style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Nome:</strong> {{ pessoal.nome }}</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Curso:</strong> {{ pessoal.curso }}</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>Período:</strong> {{ pessoal.periodo }}</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>E-mail:</strong> {{ pessoal.email }}</li>
+        <li style="padding: 8px 0; border-bottom: 1px solid #eee;"><strong>GitHub:</strong> <a href="{{ pessoal.git }}" target="_blank">{{ pessoal.git }}</a></li>
+        <li style="padding: 8px 0;"><strong>LinkedIn:</strong> <a href="{{ pessoal.linked }}" target="_blank">{{ pessoal.linked }}</a></li>
+    </ul>
+</div>
+{% else %}
+<p style="text-align: center;">Nenhum dado pessoal cadastrado. Vá ao painel Admin (/admin) e adicione seus dados no modelo Pessoal.</p>
+{% endif %}
+
+<div class="secao" style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h3 style="color: #2c3e50; margin-bottom: 15px; border-bottom: 2px solid #3498db; padding-bottom: 8px;">Cursos e Certificados</h3>
+    <ul style="list-style: none; padding: 0;">
+        {% for cert in certificados %}
+            <li style="padding: 8px 0; border-bottom: 1px solid #eee;">{{ cert.descricao }}</li>
+        {% empty %}
+            <li style="padding: 8px 0;">Nenhum certificado cadastrado ainda.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

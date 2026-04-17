@@ -1,0 +1,20 @@
+{% extends "core/base.html" %}
+
+{% block title %}Projetos - Meu Portfólio{% endblock %}
+
+{% block header_title %}Meus Projetos{% endblock %}
+
+{% block content %}
+    {% for projeto in projetos %}
+    <div class="projeto-card" style="background: white; padding: 25px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-left: 4px solid #3498db;">
+        <span style="display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.85em; color: white; margin-bottom: 10px; background-color: {% if projeto.tipo == 'Pessoal' %}#27ae60{% else %}#e67e22{% endif %};">
+            {{ projeto.get_tipo_display }}
+        </span>
+        <h3 style="color: #2c3e50; margin-bottom: 10px;">{{ projeto.nome }}</h3>
+        <p style="color: #555; margin-bottom: 10px;">{{ projeto.descricao }}</p>
+        <a href="{{ projeto.link_git }}" target="_blank" style="color: #3498db; text-decoration: none;">Acessar repositório no GitHub</a>
+    </div>
+    {% empty %}
+        <p style="text-align: center;">Nenhum projeto cadastrado. Adicione projetos no painel Admin.</p>
+    {% endfor %}
+{% endblock %}

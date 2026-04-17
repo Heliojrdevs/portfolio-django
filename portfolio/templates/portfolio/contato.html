@@ -1,0 +1,22 @@
+{% extends "core/base.html" %}
+
+{% block title %}Contato - Meu Portfólio{% endblock %}
+
+{% block header_title %}Entre em Contato{% endblock %}
+
+{% block content %}
+<div style="background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center;">
+    {% if pessoal %}
+        <h2>Vamos conversar?</h2>
+        <p style="margin-top: 15px;">Estou sempre aberto a novas conexões e oportunidades focadas em Engenharia de Software.</p>
+        
+        <div style="margin-top: 25px;">
+            <p><strong>Email:</strong> <a href="mailto:{{ pessoal.email }}">{{ pessoal.email }}</a></p>
+            <p style="margin-top: 10px;"><strong>LinkedIn:</strong> <a href="{{ pessoal.linked }}" target="_blank">Meu Perfil</a></p>
+            <p style="margin-top: 10px;"><strong>GitHub:</strong> <a href="{{ pessoal.git }}" target="_blank">Meus Repositórios</a></p>
+        </div>
+    {% else %}
+        <p>Dados de contato não disponíveis. Preencha seus dados no painel Admin.</p>
+    {% endif %}
+</div>
+{% endblock %}
